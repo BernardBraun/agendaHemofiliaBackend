@@ -40,7 +40,7 @@ public class Login implements Serializable, UserDetails {
 	private String password;
 	
 	@Column(name = "user_role", nullable = false)
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private UserRole role;
 
 	@Override
