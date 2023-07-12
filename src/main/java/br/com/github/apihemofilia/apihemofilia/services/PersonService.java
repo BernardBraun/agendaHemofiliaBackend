@@ -3,6 +3,7 @@ package br.com.github.apihemofilia.apihemofilia.services;
 import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import br.com.github.apihemofilia.apihemofilia.domain.dtos.PersonDto;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Address;
@@ -28,6 +29,9 @@ public class PersonService {
 	}
 
 	public Person processDataPerson(final PersonDto dto) {
+		
+		Assert.isNull(dto.hemocenterId(), "The blood center identifier cannot be null.");
+		Assert.isNull(dto.address().cityId(), "The city identifier cannot be null.");
 		
 		Function<Person, Hemocenter> getHemocenter = getHemocenterToPerson(dto.hemocenterId(), hemocenterRepository);
 		Function<Address, City> getCity = getCityToAddress(dto.address().cityId(), cityRepository);
