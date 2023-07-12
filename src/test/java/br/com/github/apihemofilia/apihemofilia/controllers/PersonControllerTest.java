@@ -78,4 +78,42 @@ public class PersonControllerTest {
         verify(service, times(1)).processDataPerson(personDto);
         verifyNoMoreInteractions(service); // Ensure that no other methods were called
     }
+    
+    @Test
+    public void testGetDataOfUser() {
+        // Configurar dados de teste
+        String email = "test@example.com";
+        Person person = new Person();
+        person.setCompleteName("Teste correto");
+        person.setEmail(email);
+
+        // Mock do serviço
+        when(service.getCompletePerson(email)).thenReturn(person);
+
+        // Chamar o método do controlador
+        ResponseEntity<Person> responseEntity = controller.getDataOfUser(email);
+
+        // Verificar o status da resposta
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+        // Verificar os dados da pessoa na resposta
+        Person responsePerson = responseEntity.getBody();
+        assertEquals("Teste correto", responsePerson.getCompleteName());
+        assertEquals(email, responsePerson.getEmail());
+    }
+    
+    @Test
+    public void testGetDataOfUserNotFound() {
+        // Configurar dados de teste
+        String email = "test@example.com";
+
+        // Mock do serviço para retornar null
+        when(service.getCompletePerson(email)).thenReturn(null);
+
+        // Chamar o método do controlador
+        ResponseEntity<Person> responseEntity = controller.getDataOfUser(email);
+
+        assertEquals(responseEntity.getBody(), null);
+        
+    }
 }
