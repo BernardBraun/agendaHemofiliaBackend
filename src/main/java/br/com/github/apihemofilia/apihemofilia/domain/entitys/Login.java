@@ -8,7 +8,9 @@ import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import br.com.github.apihemofilia.apihemofilia.domain.dtos.LoginDto;
 import br.com.github.apihemofilia.apihemofilia.enums.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,6 +44,16 @@ public class Login implements Serializable, UserDetails {
 	@Column(name = "user_role", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	private UserRole role;
+	
+	public Login() {
+		
+	}
+	
+	public Login(final LoginDto dto) {
+		this.login = dto.login();
+		this.password = new BCryptPasswordEncoder().encode(dto.password());
+		this.role = UserRole.USER;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -81,7 +93,5 @@ public class Login implements Serializable, UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	
 
 }

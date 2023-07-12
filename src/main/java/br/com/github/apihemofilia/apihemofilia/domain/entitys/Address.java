@@ -1,7 +1,9 @@
 package br.com.github.apihemofilia.apihemofilia.domain.entitys;
 
 import java.io.Serializable;
+import java.util.function.Function;
 
+import br.com.github.apihemofilia.apihemofilia.domain.dtos.AddressDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,5 +39,17 @@ public class Address implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "city_id", nullable = false)
 	private City city;
+	
+	public Address() {
+		
+	}
+	
+	public Address(final AddressDto dto, Function<Address, City> getCity) {
+		this.streetName = dto.streetName();
+		this.district = dto.district();
+		this.postalCode = dto.postalCode();
+		//receber funcão para encontrar a cidade
+		this.city = getCity.apply(this);
+	}
 
 }

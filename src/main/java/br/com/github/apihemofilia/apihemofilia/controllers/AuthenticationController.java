@@ -35,7 +35,8 @@ public class AuthenticationController {
 
 	@Operation(summary = "Authentication", method = "POST")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "User exits on application"),
-			@ApiResponse(responseCode = "403", description = "User not exists on application") })
+			@ApiResponse(responseCode = "403", description = "User doesn't exists on application"),
+			@ApiResponse(responseCode = "500", description = "Error internal...") })
 	@PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AuthResponse> login(@RequestBody final AuthRequest request) {
 		try {
