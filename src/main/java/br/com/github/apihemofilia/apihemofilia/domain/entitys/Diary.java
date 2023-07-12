@@ -53,4 +53,68 @@ public class Diary implements Serializable {
 	@JoinColumn(name = "hemocenter_id")
 	private Hemocenter hemocenter;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getInfusionDate() {
+		return infusionDate;
+	}
+
+	public void setInfusionDate(LocalDateTime infusionDate) {
+		this.infusionDate = infusionDate;
+	}
+
+	public Reason getReason() {
+		return reason;
+	}
+
+	public void setReason(Reason reason) {
+		this.reason = reason;
+	}
+
+	public BleedTypeLocal getBleedTypeLocal() {
+		return bleedTypeLocal;
+	}
+
+	public void setBleedTypeLocal(BleedTypeLocal bleedTypeLocal) {
+		this.bleedTypeLocal = bleedTypeLocal;
+	}
+
+	public Treatment getTreatment() {
+		return treatment;
+	}
+
+	public void setTreatment(Treatment treatment) {
+		this.treatment = treatment;
+	}
+
+	public String getObservation() {
+		return observation;
+	}
+
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Hemocenter getHemocenter() {
+		return hemocenter;
+	}
+
+	public void setHemocenter(Hemocenter hemocenter) {
+		this.hemocenter = hemocenter;
+	}
+
 }

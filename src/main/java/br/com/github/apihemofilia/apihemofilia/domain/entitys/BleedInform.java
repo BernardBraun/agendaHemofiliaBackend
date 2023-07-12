@@ -11,13 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "bleed_inform")
-@Getter
-@Setter
 public class BleedInform implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,5 +37,53 @@ public class BleedInform implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDate getBleedDate() {
+		return bleedDate;
+	}
+
+	public void setBleedDate(LocalDate bleedDate) {
+		this.bleedDate = bleedDate;
+	}
+
+	public String getBleedLocal() {
+		return bleedLocal;
+	}
+
+	public void setBleedLocal(String bleedLocal) {
+		this.bleedLocal = bleedLocal;
+	}
+
+	public String getBleedTreatment() {
+		return bleedTreatment;
+	}
+
+	public void setBleedTreatment(String bleedTreatment) {
+		this.bleedTreatment = bleedTreatment;
+	}
+
+	public String getObservation() {
+		return observation;
+	}
+
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 
 }

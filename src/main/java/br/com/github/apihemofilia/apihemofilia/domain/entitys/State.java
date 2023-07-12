@@ -46,7 +46,4 @@ public class State implements Serializable {
 		this.uf = uf;
 	}
 
-
-	
-
 }

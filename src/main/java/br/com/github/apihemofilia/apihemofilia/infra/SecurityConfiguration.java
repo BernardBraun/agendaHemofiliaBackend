@@ -31,9 +31,9 @@ public class SecurityConfiguration {
 						.requestMatchers(HttpMethod.POST, "/api/person").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/state").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/cities/{stateId}").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/person/{email}").hasRole("USER").anyRequest().authenticated()
 						)
-						
-						//.requestMatchers(HttpMethod.GET, "").hasRole("USER").anyRequest().authenticated())
+
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}

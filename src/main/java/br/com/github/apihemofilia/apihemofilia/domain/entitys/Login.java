@@ -10,6 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.github.apihemofilia.apihemofilia.domain.dtos.LoginDto;
 import br.com.github.apihemofilia.apihemofilia.enums.UserRole;
 import jakarta.persistence.Column;
@@ -20,13 +22,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "login")
-@Getter
-@Setter
 public class Login implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +37,7 @@ public class Login implements Serializable, UserDetails {
 	private String login;
 	
 	@Column(name = "password", nullable = false)
+	@JsonIgnore
 	private String password;
 	
 	@Column(name = "user_role", nullable = false)
@@ -92,6 +91,34 @@ public class Login implements Serializable, UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

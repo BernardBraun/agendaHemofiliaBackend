@@ -12,6 +12,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -80,7 +81,7 @@ public class Person implements Serializable {
 	@JoinColumn(name = "login_id", nullable = false)
 	private Login login;
 
-	@OneToMany(mappedBy = "person")
+	@OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
 	private List<Diary> diary;
 
 	public Person() {
@@ -102,6 +103,134 @@ public class Person implements Serializable {
 		this.hemocenter = getHemocenter.apply(this);
 		this.address = new Address(dto.address(), getCity);
 		this.login = new Login(dto.login());
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCompleteName() {
+		return completeName;
+	}
+
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public Float getHeight() {
+		return height;
+	}
+
+	public void setHeight(Float height) {
+		this.height = height;
+	}
+
+	public Float getWieght() {
+		return wieght;
+	}
+
+	public void setWieght(Float wieght) {
+		this.wieght = wieght;
+	}
+
+	public HemofiliaType getHemofiliaType() {
+		return hemofiliaType;
+	}
+
+	public void setHemofiliaType(HemofiliaType hemofiliaType) {
+		this.hemofiliaType = hemofiliaType;
+	}
+
+	public Integer getInfusionDays() {
+		return infusionDays;
+	}
+
+	public void setInfusionDays(Integer infusionDays) {
+		this.infusionDays = infusionDays;
+	}
+
+	public String getCellPhone() {
+		return cellPhone;
+	}
+
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public boolean isInhibitor() {
+		return inhibitor;
+	}
+
+	public void setInhibitor(boolean inhibitor) {
+		this.inhibitor = inhibitor;
+	}
+
+	public Hemocenter getHemocenter() {
+		return hemocenter;
+	}
+
+	public void setHemocenter(Hemocenter hemocenter) {
+		this.hemocenter = hemocenter;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
+	public List<Diary> getDiary() {
+		return diary;
+	}
+
+	public void setDiary(List<Diary> diary) {
+		this.diary = diary;
 	}
 
 	@Override
