@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.security.PermitAll;
 
 @RestController
 @RequestMapping("/api/diary")
@@ -40,7 +38,6 @@ public class DiaryController {
 		this.service = service;
 	}
 
-	@Secured("ROLE_USER")
 	@Operation(summary = "Creation of new register of diary", method = "POST")
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Created register with success"),
 			@ApiResponse(responseCode = "500", description = "Error internal...") })
