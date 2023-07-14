@@ -2,7 +2,11 @@ package br.com.github.apihemofilia.apihemofilia.domain.entitys;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.function.Function;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.github.apihemofilia.apihemofilia.domain.dtos.DiaryDto;
 import br.com.github.apihemofilia.apihemofilia.enums.BleedTypeLocal;
 import br.com.github.apihemofilia.apihemofilia.enums.Reason;
 import br.com.github.apihemofilia.apihemofilia.enums.Treatment;
@@ -22,36 +26,54 @@ import jakarta.persistence.Table;
 public class Diary implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "infusion_date", nullable = false)
 	private LocalDateTime infusionDate;
-	
+
 	@Column(name = "reason", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	private Reason reason;
-	
+
 	@Column(name = "bleed_type_local", nullable = false)
-	@Enumerated(EnumType.ORDINAL)	
+	@Enumerated(EnumType.ORDINAL)
 	private BleedTypeLocal bleedTypeLocal;
 
 	@Column(name = "treatment", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	private Treatment treatment;
-	
+
 	@Column(name = "observation")
 	private String observation;
-	
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "hemocenter_id")
 	private Hemocenter hemocenter;
+
+	public Diary() {
+
+	}
+
+	public Diary(final DiaryDto dto, Function<Diary, Hemocenter> getHemocenter, Function<Diary, Person> getPerson) {
+
+	}
+	
+	public void updateDiary(final DiaryDto updateDto, Function<Diary, Hemocenter> getHemocenter) {
+		this.infusionDate = updateDto.infusionDate();
+		this.reason = updateDto.reason();
+		this.bleedTypeLocal = updateDto.bleedTypeLocal();
+		this.treatment = updateDto.treatment();
+		this.observation = updateDto.observation();
+		this.hemocenter = getHemocenter.apply(this);
+	}
 
 	public Long getId() {
 		return id;

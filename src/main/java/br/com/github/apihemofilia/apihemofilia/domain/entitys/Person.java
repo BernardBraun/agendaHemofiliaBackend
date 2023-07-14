@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Function;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.github.apihemofilia.apihemofilia.domain.dtos.PersonDto;
 import br.com.github.apihemofilia.apihemofilia.enums.HemofiliaType;
 import jakarta.persistence.CascadeType;
@@ -77,10 +79,12 @@ public class Person implements Serializable {
 	@JoinColumn(name = "address_id", nullable = false)
 	private Address address;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "login_id", nullable = false)
 	private Login login;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
 	private List<Diary> diary;
 

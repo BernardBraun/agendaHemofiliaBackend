@@ -6,7 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +24,7 @@ public class Hemocenter implements Serializable {
 	@Column(name = "hemocenter_phone", nullable = false, length = 11)
 	private String phone;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "city_id", nullable = false)
 	private City city;
 
