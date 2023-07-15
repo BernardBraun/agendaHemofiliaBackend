@@ -1,14 +1,14 @@
 # Put database information here #
-db_host_mysql: localhost
-db_port_mysql: 3306
-db_data_base_name_mysql: app_hemofilia 
-db_user_mysql: root
-db_pass_mysql: marcos1985
+#db_host: localhost
+#db_port: 3306
+#db_data_base_name: app_hemofilia 
+#db_user: root
+#db_pass: marcos1985
 ############################################
 
 ## Secret to Jwt make the token
 
-jwt_secret: app_hemofilia
+#jwt_secret: app_hemofilia
 
 api:
  hemofilia:
@@ -16,15 +16,15 @@ api:
 ################################
 
 
-host: ${db_host_mysql}
-port: ${db_port_mysql}
-database: ${db_data_base_name_mysql}
-user: ${db_user_mysql}
-pass: ${db_pass_mysql}
+host: ${db_host}
+port: ${db_port}
+database: ${db_data_base_name}
+user: ${db_user}
+pass: ${db_pass}
 
 
-server:
- port: 8082
+#server:
+# port: 8082
  
 spring:
   datasource:
