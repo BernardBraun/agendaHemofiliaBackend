@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Address;
+import br.com.github.apihemofilia.apihemofilia.domain.entitys.BleedInform;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.City;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Diary;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Hemocenter;
@@ -47,5 +48,12 @@ public final class FactoryFunctions {
 			}
 		};
 	}
-	
+
+	/* Function to build a Person to Bleed information */
+	public static Function<BleedInform, Person> getPersonToBleedinformation(final Long personId,
+			PersonRepository personRepository) {
+		return bleed -> {
+			return personRepository.findById(personId).get();
+		};
+	}
 }
