@@ -48,7 +48,9 @@ public class PersonController {
 
 			var genericResponse = new GenericResponse("Created user with success", HttpStatus.CREATED.value(),
 					"There were no mistakes");
+			
 			LOGGER.info("Sucesso na criação de um novo registro de usuário.");
+			
 			return ResponseEntity.status(HttpStatus.CREATED).body(genericResponse);
 		} catch (Exception e) {
 			var genericResponse = new GenericResponse("Error internal...", HttpStatus.INTERNAL_SERVER_ERROR.value(),

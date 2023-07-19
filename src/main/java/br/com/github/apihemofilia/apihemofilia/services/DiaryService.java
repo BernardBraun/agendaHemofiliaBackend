@@ -39,37 +39,35 @@ public class DiaryService {
 		Function<Diary, Person> getPerson = FactoryFunctions.getPersonToDiary(dto.personId(), personRepository);
 
 		return new Diary(dto, getHemocenter, getPerson);
-
 	}
 
 	public Diary updateDiary(final Long diaryId, final DiaryDto updateDto) {
-		
+
 		Assert.notNull(updateDto.hemocenterId(), "The hemocenter identifier cannot be null.");
-		
+
 		Function<Diary, Hemocenter> getHemocenter = FactoryFunctions.getHemocenterToDiary(updateDto.hemocenterId(),
 				hemocenterRepository);
-		
+
 		var diary = diaryRepository.findById(diaryId)
 				.orElseThrow(() -> new IllegalArgumentException("Dosen't exists the register"));
-		
+
 		diary.updateDiary(updateDto, getHemocenter);
-		
+
 		return diary;
 	}
-	
+
 	public List<Diary> getAllDiaryOfUser(final Long personId) {
-		
+
 		Assert.notNull(personId, "The person identifier cannot be null.");
-		
+
 		return diaryRepository.findByPersonId(personId);
-		
 	}
 
 	@Transactional
 	public void persistDiary(final Diary newDiary) {
 		diaryRepository.save(newDiary);
 	}
-	
+
 	@Transactional
 	public void deleteDiary(final Long diaryId) {
 		diaryRepository.deleteById(diaryId);

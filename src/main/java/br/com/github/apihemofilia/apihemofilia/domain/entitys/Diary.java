@@ -63,6 +63,13 @@ public class Diary implements Serializable {
 	}
 
 	public Diary(final DiaryDto dto, Function<Diary, Hemocenter> getHemocenter, Function<Diary, Person> getPerson) {
+		this.infusionDate = dto.infusionDate();
+		this.reason = dto.reason();
+		this.bleedTypeLocal = dto.bleedTypeLocal();
+		this.treatment = dto.treatment();
+		this.observation = dto.observation();
+		this.person = getPerson.apply(this);
+		this.hemocenter = getHemocenter.apply(this);
 
 	}
 	

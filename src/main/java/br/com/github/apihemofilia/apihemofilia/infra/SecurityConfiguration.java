@@ -35,6 +35,7 @@ public class SecurityConfiguration {
 						.requestMatchers(HttpMethod.POST, "/api/diary").hasRole("USER")
 						.requestMatchers(HttpMethod.GET, "/api/diary/{personId}").hasRole("USER")
 						.requestMatchers(HttpMethod.DELETE, "/api/diary/{diaryId}").hasRole("USER")
+						.requestMatchers(HttpMethod.GET, "/api/hemocenter").permitAll()
 						.anyRequest().authenticated()
 						)
 

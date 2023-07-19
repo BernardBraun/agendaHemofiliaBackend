@@ -41,4 +41,12 @@ public class City implements Serializable {
 		this.name = name;
 	}
 
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
 }
