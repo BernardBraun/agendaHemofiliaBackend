@@ -50,7 +50,7 @@ public final class FactoryFunctions {
 	}
 
 	/* Function to build a Person to Bleed information */
-	public static Function<BleedInform, Person> getPersonToBleedinformation(final Long personId,
+	public static Function<BleedInform, Person> getPersonToBleedInformation(final Long personId,
 			PersonRepository personRepository) {
 		return bleed -> {
 			return personRepository.findById(personId).get();
