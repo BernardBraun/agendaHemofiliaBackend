@@ -8,7 +8,7 @@ import java.util.function.Function;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.github.apihemofilia.apihemofilia.domain.dtos.PersonDto;
-import br.com.github.apihemofilia.apihemofilia.enums.HemofiliaType;
+import br.com.github.apihemofilia.apihemofilia.enums.HemophiliaType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,7 +51,7 @@ public class Person implements Serializable {
 
 	@Column(name = "hemofilia_type", nullable = false)
 	@Enumerated(EnumType.ORDINAL)
-	private HemofiliaType hemofiliaType;
+	private HemophiliaType hemophiliaType;
 
 	@Column(name = "infusion_days", nullable = false)
 	private Integer infusionDays;
@@ -96,8 +96,8 @@ public class Person implements Serializable {
 		this.completeName = dto.completeName();
 		this.birthDate = dto.birthDate();
 		this.height = dto.height();
-		this.wieght = dto.wieght();
-		this.hemofiliaType = dto.hemofiliaType();
+		this.wieght = dto.weight();
+		this.hemophiliaType = dto.hemophiliaType();
 		this.infusionDays = dto.infusionDays();
 		this.cellPhone = dto.cellPhone();
 		this.email = dto.email();
@@ -149,12 +149,12 @@ public class Person implements Serializable {
 		this.wieght = wieght;
 	}
 
-	public HemofiliaType getHemofiliaType() {
-		return hemofiliaType;
+	public HemophiliaType getHemofiliaType() {
+		return hemophiliaType;
 	}
 
-	public void setHemofiliaType(HemofiliaType hemofiliaType) {
-		this.hemofiliaType = hemofiliaType;
+	public void setHemofiliaType(HemophiliaType hemophiliaType) {
+		this.hemophiliaType = hemophiliaType;
 	}
 
 	public Integer getInfusionDays() {
