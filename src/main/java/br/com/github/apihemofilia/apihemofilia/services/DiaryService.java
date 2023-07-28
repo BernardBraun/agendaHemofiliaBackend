@@ -10,10 +10,12 @@ import br.com.github.apihemofilia.apihemofilia.domain.dtos.DiaryDto;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Diary;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Hemocenter;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Person;
+import br.com.github.apihemofilia.apihemofilia.domain.entitys.Treatment;
 import br.com.github.apihemofilia.apihemofilia.functions.FactoryFunctions;
 import br.com.github.apihemofilia.apihemofilia.repositorys.DiaryRepository;
 import br.com.github.apihemofilia.apihemofilia.repositorys.HemocenterRepository;
 import br.com.github.apihemofilia.apihemofilia.repositorys.PersonRepository;
+import br.com.github.apihemofilia.apihemofilia.repositorys.TreatmentRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,12 +24,14 @@ public class DiaryService {
 	final HemocenterRepository hemocenterRepository;
 	final PersonRepository personRepository;
 	final DiaryRepository diaryRepository;
+	final TreatmentRepository treatmentRepository;
 
 	public DiaryService(HemocenterRepository hemocenterRepository, PersonRepository personRepository,
-			DiaryRepository diaryRepository) {
+			DiaryRepository diaryRepository, TreatmentRepository treatmentRepository) {
 		this.hemocenterRepository = hemocenterRepository;
 		this.personRepository = personRepository;
 		this.diaryRepository = diaryRepository;
+		this.treatmentRepository = treatmentRepository;
 	}
 
 	public Diary processData(final DiaryDto dto) {
@@ -37,8 +41,9 @@ public class DiaryService {
 		Function<Diary, Hemocenter> getHemocenter = FactoryFunctions.getHemocenterToDiary(dto.hemocenterId(),
 				hemocenterRepository);
 		Function<Diary, Person> getPerson = FactoryFunctions.getPersonToDiary(dto.personId(), personRepository);
+		Function<Diary, Treatment> getTreatment = FactoryFunctions.getTreatmentToDiary(dto.treatment_id(), treatmentRepository);
 
-		return new Diary(dto, getHemocenter, getPerson);
+		return new Diary(dto, getHemocenter, getPerson, getTreatment);
 	}
 
 	public Diary updateDiary(final Long diaryId, final DiaryDto updateDto) {
@@ -50,8 +55,10 @@ public class DiaryService {
 
 		var diary = diaryRepository.findById(diaryId)
 				.orElseThrow(() -> new IllegalArgumentException("Dosen't exists the register"));
+		
+		Function<Diary, Treatment> getTreatment = FactoryFunctions.getTreatmentToDiary(updateDto.treatment_id(), treatmentRepository);
 
-		diary.updateDiary(updateDto, getHemocenter);
+		diary.updateDiary(updateDto, getHemocenter, getTreatment);
 
 		return diary;
 	}

@@ -9,9 +9,11 @@ import br.com.github.apihemofilia.apihemofilia.domain.entitys.City;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Diary;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Hemocenter;
 import br.com.github.apihemofilia.apihemofilia.domain.entitys.Person;
+import br.com.github.apihemofilia.apihemofilia.domain.entitys.Treatment;
 import br.com.github.apihemofilia.apihemofilia.repositorys.CityRepository;
 import br.com.github.apihemofilia.apihemofilia.repositorys.HemocenterRepository;
 import br.com.github.apihemofilia.apihemofilia.repositorys.PersonRepository;
+import br.com.github.apihemofilia.apihemofilia.repositorys.TreatmentRepository;
 
 public final class FactoryFunctions {
 
@@ -54,6 +56,13 @@ public final class FactoryFunctions {
 			PersonRepository personRepository) {
 		return bleed -> {
 			return personRepository.findById(personId).get();
+		};
+	}
+	
+	/* Function to build Treatment to Diary */
+	public static Function<Diary, Treatment> getTreatmentToDiary(final Integer treatmentId, TreatmentRepository treatmentRepository ) {
+		return diary -> {
+			return treatmentRepository.findById(treatmentId).get();
 		};
 	}
 }
