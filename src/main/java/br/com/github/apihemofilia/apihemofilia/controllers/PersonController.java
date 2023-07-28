@@ -68,5 +68,12 @@ public class PersonController {
 	public ResponseEntity<Person> getDataOfUser(@PathVariable("email") final String email) {
 		return ResponseEntity.ok(service.getCompletePerson(email));
 	}
+	
+	@GetMapping(value = "/homeScreen/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getDataOfHomeScreen(@PathVariable("email") final String email) {
+		var map = service.getDataOfHomeScreen(email);
+		System.out.println(map);
+		return ResponseEntity.ok(map);
+	}
 
 }

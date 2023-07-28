@@ -28,14 +28,22 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers(HttpMethod.GET, "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-						.requestMatchers(HttpMethod.POST, "/api/person").permitAll()
+						
 						.requestMatchers(HttpMethod.GET, "/api/state").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/cities/{stateId}").permitAll()
+						
+						.requestMatchers(HttpMethod.POST, "/api/person").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/person/homeScreen/{email}").hasRole("USER")
 						.requestMatchers(HttpMethod.GET, "/api/person/{email}").hasRole("USER")
+						
+						
 						.requestMatchers(HttpMethod.POST, "/api/diary").hasRole("USER")
 						.requestMatchers(HttpMethod.GET, "/api/diary/{personId}").hasRole("USER")
 						.requestMatchers(HttpMethod.DELETE, "/api/diary/{diaryId}").hasRole("USER")
+						
 						.requestMatchers(HttpMethod.GET, "/api/hemocenter").permitAll()
+						
+						.requestMatchers(HttpMethod.GET, "/api/treatment").hasRole("USER")
 						.anyRequest().authenticated()
 						)
 
