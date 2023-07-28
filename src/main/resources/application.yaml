@@ -1,9 +1,9 @@
 # Put database information here #
-#db_host: localhost
-#db_port: 3306
-#db_data_base_name: app_hemofilia 
-#db_user: root
-#db_pass: marcos1985
+db_host: localhost
+db_port: 3306
+db_data_base_name: app_hemofilia 
+db_user: root
+db_pass: marcos1985
 ############################################
 
 ## Secret to Jwt make the token

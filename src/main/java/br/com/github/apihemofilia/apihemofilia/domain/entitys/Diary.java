@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.github.apihemofilia.apihemofilia.domain.dtos.DiaryDto;
 import br.com.github.apihemofilia.apihemofilia.enums.BleedTypeLocal;
 import br.com.github.apihemofilia.apihemofilia.enums.Reason;
-import br.com.github.apihemofilia.apihemofilia.enums.Treatment;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -42,8 +41,8 @@ public class Diary implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private BleedTypeLocal bleedTypeLocal;
 
-	@Column(name = "treatment", nullable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@ManyToOne
+	@JoinColumn(name = "treatment_id", nullable = false)
 	private Treatment treatment;
 
 	@Column(name = "observation")
@@ -62,22 +61,24 @@ public class Diary implements Serializable {
 
 	}
 
-	public Diary(final DiaryDto dto, Function<Diary, Hemocenter> getHemocenter, Function<Diary, Person> getPerson) {
+	public Diary(final DiaryDto dto, Function<Diary, Hemocenter> getHemocenter, Function<Diary, Person> getPerson,
+			Function<Diary, Treatment> getTreatment) {
 		this.infusionDate = dto.infusionDate();
 		this.reason = dto.reason();
 		this.bleedTypeLocal = dto.bleedTypeLocal();
-		this.treatment = dto.treatment();
+		this.treatment = getTreatment.apply(this);
 		this.observation = dto.observation();
 		this.person = getPerson.apply(this);
 		this.hemocenter = getHemocenter.apply(this);
 
 	}
-	
-	public void updateDiary(final DiaryDto updateDto, Function<Diary, Hemocenter> getHemocenter) {
+
+	public void updateDiary(final DiaryDto updateDto, Function<Diary, Hemocenter> getHemocenter,
+			Function<Diary, Treatment> getTreatment) {
 		this.infusionDate = updateDto.infusionDate();
 		this.reason = updateDto.reason();
 		this.bleedTypeLocal = updateDto.bleedTypeLocal();
-		this.treatment = updateDto.treatment();
+		this.treatment = getTreatment.apply(this);
 		this.observation = updateDto.observation();
 		this.hemocenter = getHemocenter.apply(this);
 	}
